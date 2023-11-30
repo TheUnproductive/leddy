@@ -17,7 +17,7 @@ impl Keyboard {
         let dev_info =
             match hidapi.device_list().find(|dev|
                 dev.vendor_id() == 0x2f0e &&
-                (dev.product_id() == 0x0101 || dev.product_id() == 0x0102 || dev.product_id() == 0x0105) &&
+                (dev.product_id() == 0x0105) &&
                 dev.interface_number() == 1)
             {
                 Some(di) => di,
@@ -26,12 +26,8 @@ impl Keyboard {
                                              found")),
             };
 
-        if dev_info.product_id() == 0x0101 {
-            eprintln!("Warning: leddy may not work properly for (normal-sized) \
-                       STREAK keyboards");
-        }
-        else if dev_info.product_id() == 0x0105 {
-            eprintln!("Warning: leddy may not work properly for STREAK65 keyboards");
+        if dev_info.product_id() == 0x0105 {
+            eprintln!("Warning: leddy-streak65 is not implemented to full working extends. Please use at your own risk.");
         }
 
         let dev = match dev_info.open_device(&hidapi) {

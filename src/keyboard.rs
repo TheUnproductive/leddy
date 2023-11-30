@@ -30,6 +30,9 @@ impl Keyboard {
             eprintln!("Warning: leddy may not work properly for (normal-sized) \
                        STREAK keyboards");
         }
+        else if dev_info.product_id() == 0x0105 {
+            eprintln!("Warning: leddy may not work properly for STREAK65 keyboards");
+        }
 
         let dev = match dev_info.open_device(&hidapi) {
             Ok(x) => x,

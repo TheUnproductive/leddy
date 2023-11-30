@@ -17,7 +17,7 @@ impl Keyboard {
         let dev_info =
             match hidapi.device_list().find(|dev|
                 dev.vendor_id() == 0x2f0e &&
-                (dev.product_id() == 0x0101 || dev.product_id() == 0x0102) &&
+                (dev.product_id() == 0x0101 || dev.product_id() == 0x0102 || dev.product_id() == 0x0105) &&
                 dev.interface_number() == 1)
             {
                 Some(di) => di,
